@@ -1,114 +1,97 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { fetch } from 'whatwg-fetch';
-import jsonp from 'fetch-jsonp';
+import { NavItem } from '@alifd/next';
+import { Nav } from '@alifd/next';
+import { Col } from '@alifd/next';
+import { Select } from '@alifd/next';
+import { FormItem } from '@alifd/next';
+import { Form } from '@alifd/next';
+import { LineChartBG } from '@alifd/next';
+import { TableColumn } from '@alifd/next';
+import { Table } from '@alifd/next';
+import { Row } from '@alifd/next';
 import styles from './style.js';
 const print = function(value) {
   console.log(value);
 };
 class Page_0 extends Component {
-  state = {
-    data: [
-      {
-        title: '小户型卫浴怎样才能装得高大上？',
-        coverImage: 'https://img.alicdn.com/tfs/TB1Txq6o7T2gK0jSZFkXXcIQFXa-684-684.png',
-        readCount: 200,
-        user: { userImage: 'https://img.alicdn.com/tfs/TB1DWe6oYj1gK0jSZFOXXc7GpXa-60-60.png', userName: '时尚家居' },
-        url: 'https://www.imgcook.com'
-      },
-      {
-        title: '拥有超多功能的40平米简约小公寓了解一下',
-        coverImage: 'https://img.alicdn.com/tfs/TB1XRQTo7P2gK0jSZPxXXacQpXa-684-648.png',
-        readCount: 500,
-        user: {
-          userImage: 'https://img.alicdn.com/tfs/TB1DWe6oYj1gK0jSZFOXXc7GpXa-60-60.png',
-          userName: '花花设计工作'
-        },
-        url: 'https://www.imgcook.com/docs'
-      }
-    ]
-  };
-  constructor(props, context) {
-    super();
-    console.log('super props');
-    this.fetch_example();
-    this.jsonp_example();
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {}
-  isReadCountShow(readCount) {
-    return readCount > 300;
-  }
-  fetch_example() {
-    fetch('https://jsonplaceholder.typicode.com/todos/1', { method: 'GET', headers: '{"Content-Type":"json"}' })
-      .then(response => response.json())
-      .then((data, error) => {
-        console.log('fetch example: ', data, error);
-        return data;
-      })
-      .catch(e => {
-        console.log('error', e);
-      });
-  }
-  jsonp_example() {
-    jsonp('https://assets.airbnb.com/frontend/search_results.js', { jsonpCallbackFunction: 'search_results', body: {} })
-      .then(response => response.json())
-      .then((data, error) => {
-        console.log('jsonp example: ', data, error);
-        return data;
-      })
-      .catch(e => {
-        console.log('error', e);
-      });
-  }
   render() {
     return (
-      <div style={styles.box}>
-        {this.state.data.map((item, index) => {
-          return (
-            <div
-              key={index}
-              onClick={e => {
-                window.open(item.url, '_blank');
-              }}
-              data-url={item.url}
-              key={item.index}
-            >
-              <div style={styles.bd}>
-                <img style={styles.layer} src={'https://img.alicdn.com/tfs/TB1bLoWoYH1gK0jSZFwXXc7aXXa-684-684.png'} />
-                <img style={styles.bg} src={item.coverImage} />
-                <div style={styles.wrap}>
-                  <img
-                    style={styles.riverdinwei}
-                    src={'https://img.alicdn.com/tfs/TB1mtZRoVT7gK0jSZFpXXaTkpXa-28-36.png'}
-                  />
-                  <span style={styles.distance}>距离500m</span>
-                </div>
-              </div>
-              <div style={styles.main}>
-                <span style={styles.title}>{item.title}</span>
-              </div>
-              <div style={styles.ft}>
-                <div style={styles.block}>
-                  <img
-                    style={styles.xianjin}
-                    src={'https://img.alicdn.com/tfs/TB1OvsYoW61gK0jSZFlXXXDKFXa-60-60.png'}
-                  />
-                  <span style={styles.fashionHome}>{item.user.userName}</span>
-                </div>
-                {this.isReadCountShow(item.readCount) && (
-                  <div style={styles.group}>
-                    <img
-                      style={styles.favorite}
-                      src={'https://img.alicdn.com/tfs/TB1arwYo7T2gK0jSZFkXXcIQFXa-46-44.png'}
-                    />
-                    <span style={styles.num}>{item.readCount}</span>
-                  </div>
-                )}
-              </div>
+      <div>
+        <Nav footer={''} direction={'hoz'} type={'primary'} header={[]}>
+          <NavItem>蚁服</NavItem>
+          <NavItem>FINANCIAL TECHNOLOGY</NavItem>
+          <NavItem>金融科技</NavItem>
+          <NavItem>管理控制台</NavItem>
+          <NavItem>出产品与服务V</NavItem>
+        </Nav>
+        <Row>
+          <Col span={'4'}>
+            <Nav direction={'ver'} type={'normal'}>
+              <NavItem key={'level1Menu0'}>一级菜单</NavItem>
+              <NavItem key={'level1Menu1'}>一级菜单</NavItem>
+              <NavItem key={'level1Menu2'}>一级菜单</NavItem>
+              <NavItem key={'level2Menu3'}>二级菜单</NavItem>
+              <NavItem key={'level2Menu4'}>二级菜单</NavItem>
+              <NavItem key={'level2Menu5'}>二级菜单</NavItem>
+            </Nav>
+          </Col>
+          <Col>
+            <Form inline={true} labelAlign={'left'}>
+              <FormItem label={'产品名称'} name={'productName'}>
+                <Select />
+              </FormItem>
+              <FormItem label={'页面'} name={'page'}>
+                <Select />
+              </FormItem>
+              <FormItem label={'门户页'} name={'portalPage'}></FormItem>
+            </Form>
+            <div>
+              <LineChartBG
+                yType={'normal'}
+                forceFit={true}
+                line={true}
+                point={false}
+                area={false}
+                shape={'line'}
+                legend={true}
+                y={['Tokyo']}
+                data={[
+                  { month: 'Jan', Tokyo: 7, London: 3.9 },
+                  { month: 'Feb', Tokyo: 6.9, London: 4.2 },
+                  { month: 'Mar', Tokyo: 9.5, London: 5.7 },
+                  { month: 'Apr', Tokyo: 14.5, London: 8.5 },
+                  { month: 'May', Tokyo: '-', London: '-' },
+                  { month: 'Jun', Tokyo: 21.5, London: 15.2 },
+                  { month: 'Jul', Tokyo: 25.2, London: 17 },
+                  { month: 'Aug', Tokyo: 26.5, London: 16.6 },
+                  { month: 'Sep', Tokyo: 23.3, London: 14.2 },
+                  { month: 'Oct', Tokyo: 18.3, London: 10.3 },
+                  { month: 'Nov', Tokyo: 13.9, London: 6.6 },
+                  { month: 'Dec', Tokyo: 9.6, London: 4.8 }
+                ]}
+                x={'month'}
+                fillX={true}
+                tooltip={{ field: 'month' }}
+              />
             </div>
-          );
-        })}
+            <Table
+              dataSource={[
+                { time: '0：00', pv: '6567', uv: '344', indicator1: '+50%', indicator2: '+32%' },
+                { time: '0：00', pv: '6567', uv: '344', indicator1: '+50%', indicator2: '+32%' },
+                { time: '0：00', pv: '6567', uv: '344', indicator1: '+50%', indicator2: '+32%' },
+                { time: '0：00', pv: '6567', uv: '344', indicator1: '+50%', indicator2: '+32%' }
+              ]}
+            >
+              <TableColumn title={'时间'} dataIndex={'time'} key={'time'} renderType={'text'} />
+              <TableColumn title={'Pv'} dataIndex={'pv'} key={'pv'} renderType={'text'} />
+              <TableColumn title={'Uv'} dataIndex={'uv'} key={'uv'} renderType={'text'} />
+              <TableColumn title={'指标一'} dataIndex={'indicator1'} key={'indicator1'} renderType={'text'} />
+              <TableColumn title={'指标二'} dataIndex={'indicator2'} key={'indicator2'} renderType={'text'} />
+            </Table>
+          </Col>
+        </Row>
       </div>
     );
   }

@@ -14,7 +14,63 @@ module.exports = function(schema, option) {
   const classes = [];
 
   // 1vw = width / 100
-  const _w = option.responsive.width / 100;
+  const _w = (option.responsive.width / 100) || 750;
+
+  const componentsMap = option.componentsMap;
+  const components = [];
+
+  const importComponent = (type) => {
+    let result = '';
+
+    if (!componentsMap || !componentsMap.list) {
+      return result;
+    }
+
+    if (componentsMap && !components.includes(type)) {
+      const componentMap = componentsMap.list.filter(com => com.name === type)[0];
+
+      if (componentMap) {
+        const pkgName = componentMap.package ? componentMap.package : '@alifd/next';
+
+        // hack
+        componentMap.destructuring = 1;
+
+        if (componentMap.exportName) {
+          if (componentMap.exportName !== componentMap.name) {
+            if (componentMap.subName) {
+              let exportName = componentMap.destructuring 
+                ? `{ ${componentMap.name} }` 
+                : componentMap.name;
+              result = componentMap.main
+                ? `import ${exportName} from '${pkgName}${componentMap.main}'`
+                : `import ${exportName} from '${pkgName}'`;
+              result += `\nconst ${componentMap.name} = ${exportName}.${componentMap.subName}`;
+            } else {
+              let exportName = componentMap.destructuring 
+                ? `{ ${componentMap.exportName} as ${componentMap.name} }` 
+                : `${componentMap.exportName} as ${componentMap.name}`;
+              result = componentMap.main
+                ? `import ${exportName} from '${pkgName}${componentMap.main}'`
+                : `import ${exportName} from '${pkgName}'`;
+            }
+          }
+        } else {
+          let exportName = componentMap.destructuring ? `{ ${componentMap.name} }` : componentMap.name;
+          result = componentMap.main
+            ? `import ${exportName} from '${pkgName}${componentMap.main}'`
+            : `import ${exportName} from '${pkgName}'`;
+        }
+
+        components.push(componentMap.name);
+      } else {
+        // not find in componentsMap
+        result = `import {${type}} from '@alifd/next'`;
+        components.push(type);
+      }      
+    }
+
+    return result;
+  };
 
   const isExpression = (value) => {
     return /^\{\{.*\}\}$/.test(value);
@@ -40,38 +96,73 @@ module.exports = function(schema, option) {
     return String(value);
   };
 
-  // convert to responsive unit, such as vw
-  const parseStyle = (style) => {
-    for (let key in style) {
-      switch (key) {
-        case 'fontSize':
-        case 'marginTop':
-        case 'marginBottom':
-        case 'paddingTop':
-        case 'paddingBottom':
-        case 'height':
-        case 'top':
-        case 'bottom':
-        case 'width':
-        case 'maxWidth':
-        case 'left':
-        case 'right':
-        case 'paddingRight':
-        case 'paddingLeft':
-        case 'marginLeft':
-        case 'marginRight':
-        case 'lineHeight':
-        case 'borderBottomRightRadius':
-        case 'borderBottomLeftRadius':
-        case 'borderTopRightRadius':
-        case 'borderTopLeftRadius':
-        case 'borderRadius':
-          style[key] = (parseInt(style[key]) / _w).toFixed(2) + 'vw';
-          break;
+  // flexDirection -> flex-direction
+  const parseCamelToLine = (string) => {
+    return string.split(/(?=[A-Z])/).join('-').toLowerCase();
+  }
+
+  // className structure support
+  const generateLess = (schema, style) => {
+    let less = '';
+
+    function walk(json) {
+      if (json.props && json.props.className) {
+        let className = json.props.className;
+        less += `.${className} {`;
+
+        for (let key in style[className]) {
+          less += `${parseCamelToLine(key)}: ${style[className][key]};\n`
+        }
+      }
+
+      if (Array.isArray(json.children) && json.children.length > 0) {
+        json.children.forEach(child => walk(child));
+      }
+
+      if (json.props && json.props.className) {
+        less += '}';
       }
     }
 
-    return style;
+    walk(schema);
+
+    return less;
+  };
+
+  // convert to responsive unit, such as vw
+  const parseStyle = (styles) => {
+    for (let style in styles) {
+      for (let key in styles[style]) {
+        switch (key) {
+          case 'fontSize':
+          case 'marginTop':
+          case 'marginBottom':
+          case 'paddingTop':
+          case 'paddingBottom':
+          case 'height':
+          case 'top':
+          case 'bottom':
+          case 'width':
+          case 'maxWidth':
+          case 'left':
+          case 'right':
+          case 'paddingRight':
+          case 'paddingLeft':
+          case 'marginLeft':
+          case 'marginRight':
+          case 'lineHeight':
+          case 'borderBottomRightRadius':
+          case 'borderBottomLeftRadius':
+          case 'borderTopRightRadius':
+          case 'borderTopLeftRadius':
+          case 'borderRadius':
+            styles[style][key] = (parseInt(styles[style][key]) / _w).toFixed(2) + 'vw';
+            break;
+        }
+      }
+    }
+
+    return styles;
   }
 
   // parse function, return params and content
@@ -87,7 +178,7 @@ module.exports = function(schema, option) {
 
   // parse layer props(static values or expression)
   const parseProps = (value, isReactNode) => {
-    if (typeof value === 'string') {
+    if (typeof value === 'string' || typeof value === 'number') {
       if (isExpression(value)) {
         if (isReactNode) {
           return value.slice(1, -1);
@@ -104,6 +195,10 @@ module.exports = function(schema, option) {
     } else if (typeof value === 'function') {
       const {params, content} = parseFunction(value);
       return `(${params}) => {${content}}`;
+    } else if (typeof value === 'boolean') {
+      return value;
+    } else if (typeof value === 'object') {
+      return JSON.stringify(value);
     }
   }
 
@@ -185,7 +280,7 @@ module.exports = function(schema, option) {
     }
 
     // add loop key
-    const tagEnd = render.match(/^<.+?\s/)[0].length;
+    const tagEnd = render.match(/^<[^\s>]+/)[0].length;
     render = `${render.slice(0, tagEnd)} key={${loopArgIndex}}${render.slice(tagEnd)}`;
 
     // remove `this` 
@@ -199,12 +294,12 @@ module.exports = function(schema, option) {
 
   // generate render xml
   const generateRender = (schema) => {
-    const type = schema.componentName.toLowerCase();
+    const type = schema.componentName;
     const className = schema.props && schema.props.className;
     const classString = className ? ` style={styles.${className}}` : '';
 
     if (className) {
-      style[className] = parseStyle(schema.props.style);
+      style[className] = schema.props.style;
     }
 
     let xml;
@@ -217,22 +312,37 @@ module.exports = function(schema, option) {
     })
 
     switch(type) {
-      case 'text':
+      case 'Text':
         const innerText = parseProps(schema.props.text, true);
         xml = `<span${classString}${props}>${innerText}</span>`;
         break;
-      case 'image':
+      case 'Image':
         const source = parseProps(schema.props.src);
         xml = `<img${classString}${props} src={${source}} />`;
         break;
-      case 'div':
-      case 'page':
-      case 'block':
+      case 'Div':
+      case 'Page':
+      case 'Block':
+      case 'Component':
         if (schema.children && schema.children.length) {
           xml = `<div${classString}${props}>${transform(schema.children)}</div>`;
         } else {
           xml = `<div${classString}${props} />`;
         }
+        break;
+      default:
+        if (schema.children && schema.children.length) {
+          xml = `<${type}${classString}${props}>${transform(schema.children)}</${type}>`;
+        } else {
+          xml = `<${type}${classString}${props} />`;
+        }
+
+        const importString = importComponent(type);
+
+        if (importString) {
+          imports.push(importString);
+        }
+        
         break;
     }
 
@@ -257,10 +367,15 @@ module.exports = function(schema, option) {
       schema.forEach((layer) => {
         result += transform(layer);
       });
+    } else if (typeof schema === 'string') {
+      // text string children
+      result += schema;
     } else {
+      if (!schema.componentName) return result;
+
       const type = schema.componentName.toLowerCase();
 
-      if (['page', 'block'].indexOf(type) !== -1) {
+      if (['page', 'block', 'component'].indexOf(type) !== -1) {
         // 容器组件处理: state/method/dataSource/lifeCycle/render
         const states = [];
         const lifeCycles = [];
@@ -362,6 +477,16 @@ module.exports = function(schema, option) {
       {
         panelName: `style.js`,
         panelValue: prettier.format(`export default ${toString(style)}`, prettierOpt),
+        panelType: 'js'
+      },
+      {
+        panelName: `style.less`,
+        panelValue: prettier.format(generateLess(schema, style), { parser: 'less' }),
+        panelType: 'less'
+      },
+      {
+        panelName: `style.responsive.js`,
+        panelValue: prettier.format(`export default ${toString(parseStyle(style))}`, prettierOpt),
         panelType: 'js'
       }
     ],

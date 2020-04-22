@@ -1,438 +1,306 @@
 module.exports = {
   "componentName": "Page",
-  "id": "Block_745855",
-  "rect": {
-    "x": 0,
-    "y": 0,
-    "width": 342,
-    "height": 534
-  },
-  "smart": {},
-  "props": {
-    "style": {
-      "display": "flex",
-      "flexDirection": "row",
-      "justifyContent": "space-around",
-      "alignItems": "flex-start",
-      "height": "534px"
-    },
-    "className": "box"
-  },
+  "fileName": "index",
+  "props": {},
   "children": [{
-    "componentName": "Div",
+    "componentName": "Nav",
     "props": {
-      "onClick": function onClick(e) {
-        window.open(this.item.url, '_blank')
+      "footer": "",
+      "direction": "hoz",
+      "type": "primary",
+      "style": {
+        "margin": "0 0 0 0",
+        "padding": "0 20px 0 0"
       },
-      "data-url": "{{this.item.url}}",
-      "key": "{{this.item.index}}"
+      "header": []
     },
     "children": [{
-      "componentName": "Div",
-      "id": "Block_644975",
-      "rect": {
-        "x": 0,
-        "y": 0,
-        "width": 342,
-        "height": 342
-      },
-      "smart": {},
-      "props": {
-        "style": {
-          "display": "flex",
-          "position": "relative",
-          "alignItems": "flex-start",
-          "flexDirection": "row",
-          "opacity": "1.00",
-          "width": "342px",
-          "height": "342px"
-        },
-        "className": "bd"
-      },
-      "children": [{
-        "componentName": "Image",
-        "id": "Image_7",
-        "rect": {
-          "x": 0,
-          "y": 0,
-          "width": 342,
-          "height": 342
-        },
-        "smart": {},
-        "props": {
-          "style": {
-            "position": "absolute",
-            "top": "0px",
-            "left": "0px",
-            "width": "342px",
-            "height": "342px",
-            "overflow": "hidden"
-          },
-          "src": "https://img.alicdn.com/tfs/TB1bLoWoYH1gK0jSZFwXXc7aXXa-684-684.png",
-          "className": "layer"
-        }
-      }, {
-        "componentName": "Image",
-        "id": "Image_8",
-        "rect": {
-          "x": 0,
-          "y": 0,
-          "width": 342,
-          "height": 342
-        },
-        "smart": {},
-        "props": {
-          "style": {
-            "position": "absolute",
-            "top": "0px",
-            "left": "0px",
-            "opacity": "1.00",
-            "width": "342px",
-            "height": "342px"
-          },
-          "className": "bg",
-          "src": "{{this.item.coverImage}}"
-        }
-      }, {
-        "componentName": "Div",
-        "id": "Shape_9",
-        "rect": {
-          "x": 18,
-          "y": 18,
-          "width": 122,
-          "height": 30
-        },
-        "smart": {},
-        "props": {
-          "style": {
-            "boxSizing": "border-box",
-            "display": "flex",
-            "position": "relative",
-            "alignItems": "center",
-            "flexDirection": "row",
-            "marginTop": "18px",
-            "marginLeft": "18px",
-            "borderRadius": "15px",
-            "backgroundColor": "rgba(0,0,0,0.40)",
-            "paddingRight": "9px",
-            "paddingLeft": "10px",
-            "height": "30px"
-          },
-          "className": "wrap"
-        },
-        "children": [{
-          "componentName": "Image",
-          "id": "Image_11",
-          "rect": {
-            "x": 28,
-            "y": 24,
-            "width": 14,
-            "height": 18
-          },
-          "smart": {},
-          "props": {
-            "style": {
-              "opacity": "1.00",
-              "width": "14px",
-              "height": "18px"
-            },
-            "src": "https://img.alicdn.com/tfs/TB1mtZRoVT7gK0jSZFpXXaTkpXa-28-36.png",
-            "className": "riverdinwei"
-          }
-        }, {
-          "componentName": "Text",
-          "id": "Text_10_0",
-          "rect": {
-            "x": 46,
-            "y": 22,
-            "width": 84,
-            "height": 22
-          },
-          "smart": {},
-          "props": {
-            "style": {
-              "marginLeft": "4px",
-              "height": "22px",
-              "fontWeight": 400,
-              "fontSize": "18px",
-              "color": "#ffffff",
-              "lineHeight": "22px",
-              "whiteSpace": "nowrap"
-            },
-            "text": "距离500m",
-            "className": "distance"
-          }
-        }]
-      }]
+      "componentName": "NavItem",
+      "props": {},
+      "children": "蚁服"
     }, {
-      "componentName": "Div",
-      "id": "Shape_5",
-      "rect": {
-        "x": 0,
-        "y": 342,
-        "width": 342,
-        "height": 114
-      },
-      "smart": {},
-      "props": {
-        "style": {
-          "display": "flex",
-          "alignItems": "flex-start",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "backgroundColor": "#ffffff",
-          "width": "342px",
-          "height": "114px"
-        },
-        "className": "main"
-      },
-      "children": [{
-        "componentName": "Text",
-        "id": "Text_6_0",
-        "rect": {
-          "x": 18,
-          "y": 364,
-          "width": 300,
-          "height": 88
-        },
-        "smart": {},
-        "props": {
-          "style": {
-            "marginTop": "22px",
-            "width": "300px",
-            "height": "88px",
-            "fontWeight": 400,
-            "fontSize": "30px",
-            "color": "#333333",
-            "lineHeight": "44px",
-            "overflow": "hidden",
-            "textOverflow": "ellipsis"
-          },
-          "className": "title",
-          "text": "{{this.item.title}}"
-        }
-      }]
+      "componentName": "NavItem",
+      "props": {},
+      "children": "FINANCIAL TECHNOLOGY"
     }, {
-      "componentName": "Div",
-      "id": "Shape_0",
-      "rect": {
-        "x": 0,
-        "y": 456,
-        "width": 342,
-        "height": 78
-      },
-      "smart": {},
-      "props": {
-        "style": {
-          "boxSizing": "border-box",
-          "display": "flex",
-          "alignItems": "center",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "borderBottomLeftRadius": "12px",
-          "borderBottomRightRadius": "12px",
-          "backgroundColor": "#ffffff",
-          "paddingRight": "17px",
-          "paddingLeft": "18px",
-          "width": "342px",
-          "height": "78px",
-          "overflow": "hidden"
-        },
-        "className": "ft"
-      },
-      "children": [{
-        "componentName": "Div",
-        "id": "Block_788015",
-        "rect": {
-          "x": 18,
-          "y": 480,
-          "width": 132,
-          "height": 30
-        },
-        "smart": {},
-        "props": {
-          "style": {
-            "display": "flex",
-            "alignItems": "center",
-            "flexDirection": "row",
-            "height": "30px"
-          },
-          "className": "block"
-        },
-        "children": [{
-          "componentName": "Image",
-          "id": "Image_1",
-          "rect": {
-            "x": 18,
-            "y": 480,
-            "width": 30,
-            "height": 30
-          },
-          "smart": {},
-          "props": {
-            "style": {
-              "width": "30px",
-              "height": "30px"
-            },
-            "src": "https://img.alicdn.com/tfs/TB1OvsYoW61gK0jSZFlXXXDKFXa-60-60.png",
-            "className": "xianjin"
-          }
-        }, {
-          "componentName": "Text",
-          "id": "Text_2_0",
-          "rect": {
-            "x": 54,
-            "y": 481,
-            "width": 96,
-            "height": 28
-          },
-          "smart": {},
-          "props": {
-            "style": {
-              "marginLeft": "6px",
-              "height": "28px",
-              "fontWeight": 300,
-              "fontSize": "24px",
-              "color": "#666666",
-              "lineHeight": "28px",
-              "whiteSpace": "nowrap"
-            },
-            "className": "fashionHome",
-            "text": "{{this.item.user.userName}}"
-          }
-        }]
-      }, {
-        "componentName": "Div",
-        "id": "Block_615383",
-        "rect": {
-          "x": 261,
-          "y": 480,
-          "width": 63,
-          "height": 30
-        },
-        "smart": {},
-        "props": {
-          "style": {
-            "display": "flex",
-            "alignItems": "center",
-            "flexDirection": "row",
-            "height": "30px"
-          },
-          "className": "group"
-        },
-        "children": [{
-          "componentName": "Image",
-          "id": "Image_4",
-          "rect": {
-            "x": 261,
-            "y": 484,
-            "width": 22,
-            "height": 22
-          },
-          "smart": {},
-          "props": {
-            "style": {
-              "width": "22px",
-              "height": "22px"
-            },
-            "src": "https://img.alicdn.com/tfs/TB1arwYo7T2gK0jSZFkXXcIQFXa-46-44.png",
-            "className": "favorite"
-          }
-        }, {
-          "componentName": "Text",
-          "id": "Text_3_0",
-          "rect": {
-            "x": 288,
-            "y": 482,
-            "width": 36,
-            "height": 26
-          },
-          "smart": {},
-          "props": {
-            "style": {
-              "marginLeft": "5px",
-              "height": "26px",
-              "fontWeight": 400,
-              "fontSize": "22px",
-              "color": "#999999",
-              "lineHeight": "26px",
-              "whiteSpace": "nowrap"
-            },
-            "className": "num",
-            "text": "{{this.item.readCount}}"
-          }
-        }],
-        "condition": "{{this.isReadCountShow(this.item.readCount)}}"
-      }]
-    }],
-    "loopArgs": ["item", "index"],
-    "loop": "{{this.state.data}}"
-  }],
-  "fileName": "index",
-  "methods": {
-    "isReadCountShow": function isReadCountShow(readCount) {
-      return readCount > 300;
-    }
-  },
-  "lifeCycles": {
-    "_constructor": function constructor(props, context) {
-      console.log('super props');
+      "componentName": "NavItem",
+      "props": {},
+      "children": "金融科技"
+    }, {
+      "componentName": "NavItem",
+      "props": {},
+      "children": "管理控制台"
+    }, {
+      "componentName": "NavItem",
+      "props": {},
+      "children": "出产品与服务V"
+    }]
+  }, {
+    "componentName": "Row",
+    "props": {
+      "style": {}
     },
-    "componentDidUpdate": (prevProps, prevState, snapshot) => {
-      
-    }
-  },
-  "dataSource": {
-    "list": [{
-      "id": "fetch_example",
-      "isInit": true,
-      "type": "fetch",
-      "options": {
-        "method": "GET",
-        "uri": "https://jsonplaceholder.typicode.com/todos/1",
-        "headers": {
-          "Content-Type": "json"
-        }
+    "children": [{
+      "componentName": "Col",
+      "props": {
+        "span": 4
       },
-      "dataHandler": function dataHandler(data, error) {
-        console.log('fetch example: ', data, error)
-        return data;
-      }
+      "children": [{
+        "componentName": "Nav",
+        "props": {
+          "direction": "ver",
+          "type": "normal",
+          "style": {
+            "margin": "0 0 0 0",
+            "padding": "0 20px 0 0",
+            "height": "100%"
+          }
+        },
+        "children": [{
+          "componentName": "NavItem",
+          "props": {
+            "key": "level1Menu0"
+          },
+          "children": "一级菜单"
+        }, {
+          "componentName": "NavItem",
+          "props": {
+            "key": "level1Menu1"
+          },
+          "children": "一级菜单"
+        }, {
+          "componentName": "NavItem",
+          "props": {
+            "key": "level1Menu2"
+          },
+          "children": "一级菜单"
+        }, {
+          "componentName": "NavItem",
+          "props": {
+            "key": "level2Menu3"
+          },
+          "children": "二级菜单"
+        }, {
+          "componentName": "NavItem",
+          "props": {
+            "key": "level2Menu4"
+          },
+          "children": "二级菜单"
+        }, {
+          "componentName": "NavItem",
+          "props": {
+            "key": "level2Menu5"
+          },
+          "children": "二级菜单"
+        }]
+      }]
     }, {
-      "id": "jsonp_example",
-      "isInit": true,
-      "type": "jsonp",
-      "options": {
-        "method": "GET",
-        "params": {},
-        "uri": "https://assets.airbnb.com/frontend/search_results.js",
-        "jsonpCallbackFunction": "search_results"
-      },
-      "dataHandler": function dataHandler(data, error) {
-        console.log('jsonp example: ', data, error)
-        return data;
-      }
+      "componentName": "Col",
+      "props": {},
+      "children": [{
+        "componentName": "Form",
+        "props": {
+          "inline": true,
+          "labelAlign": "left",
+          "style": {
+            "margin": 20
+          }
+        },
+        "children": [
+          [
+            [{
+              "componentName": "FormItem",
+              "props": {
+                "label": "产品名称",
+                "name": "productName",
+                "style": {
+                  "width": "30%"
+                }
+              },
+              "children": [{
+                "componentName": "Select",
+                "props": {}
+              }]
+            }],
+            [{
+              "componentName": "FormItem",
+              "props": {
+                "label": "页面",
+                "name": "page",
+                "style": {
+                  "width": "30%"
+                }
+              },
+              "children": [{
+                "componentName": "Select",
+                "props": {}
+              }]
+            }],
+            [{
+              "componentName": "FormItem",
+              "props": {
+                "label": "门户页",
+                "name": "portalPage",
+                "style": {
+                  "width": "30%"
+                }
+              },
+              "children": [{
+                "props": {}
+              }]
+            }]
+          ]
+        ]
+      }, {
+        "componentName": "Div",
+        "props": {
+          "style": {
+            "margin": 20
+          }
+        },
+        "children": [{
+          "componentName": "LineChartBG",
+          "props": {
+            "yType": "normal",
+            "forceFit": true,
+            "line": true,
+            "point": false,
+            "area": false,
+            "shape": "line",
+            "legend": true,
+            "y": ["Tokyo"],
+            "data": [{
+              "month": "Jan",
+              "Tokyo": 7,
+              "London": 3.9
+            }, {
+              "month": "Feb",
+              "Tokyo": 6.9,
+              "London": 4.2
+            }, {
+              "month": "Mar",
+              "Tokyo": 9.5,
+              "London": 5.7
+            }, {
+              "month": "Apr",
+              "Tokyo": 14.5,
+              "London": 8.5
+            }, {
+              "month": "May",
+              "Tokyo": "-",
+              "London": "-"
+            }, {
+              "month": "Jun",
+              "Tokyo": 21.5,
+              "London": 15.2
+            }, {
+              "month": "Jul",
+              "Tokyo": 25.2,
+              "London": 17
+            }, {
+              "month": "Aug",
+              "Tokyo": 26.5,
+              "London": 16.6
+            }, {
+              "month": "Sep",
+              "Tokyo": 23.3,
+              "London": 14.2
+            }, {
+              "month": "Oct",
+              "Tokyo": 18.3,
+              "London": 10.3
+            }, {
+              "month": "Nov",
+              "Tokyo": 13.9,
+              "London": 6.6
+            }, {
+              "month": "Dec",
+              "Tokyo": 9.6,
+              "London": 4.8
+            }],
+            "x": "month",
+            "fillX": true,
+            "tooltip": {
+              "field": "month"
+            }
+          }
+        }]
+      }, {
+        "componentName": "Table",
+        "props": {
+          "style": {
+            "margin": 20
+          },
+          "dataSource": [{
+            "time": "0：00",
+            "pv": "6567",
+            "uv": "344",
+            "indicator1": "+50%",
+            "indicator2": "+32%"
+          }, {
+            "time": "0：00",
+            "pv": "6567",
+            "uv": "344",
+            "indicator1": "+50%",
+            "indicator2": "+32%"
+          }, {
+            "time": "0：00",
+            "pv": "6567",
+            "uv": "344",
+            "indicator1": "+50%",
+            "indicator2": "+32%"
+          }, {
+            "time": "0：00",
+            "pv": "6567",
+            "uv": "344",
+            "indicator1": "+50%",
+            "indicator2": "+32%"
+          }]
+        },
+        "children": [{
+          "componentName": "TableColumn",
+          "props": {
+            "title": "时间",
+            "dataIndex": "time",
+            "key": "time",
+            "renderType": "text"
+          }
+        }, {
+          "componentName": "TableColumn",
+          "props": {
+            "title": "Pv",
+            "dataIndex": "pv",
+            "key": "pv",
+            "renderType": "text"
+          }
+        }, {
+          "componentName": "TableColumn",
+          "props": {
+            "title": "Uv",
+            "dataIndex": "uv",
+            "key": "uv",
+            "renderType": "text"
+          }
+        }, {
+          "componentName": "TableColumn",
+          "props": {
+            "title": "指标一",
+            "dataIndex": "indicator1",
+            "key": "indicator1",
+            "renderType": "text"
+          }
+        }, {
+          "componentName": "TableColumn",
+          "props": {
+            "title": "指标二",
+            "dataIndex": "indicator2",
+            "key": "indicator2",
+            "renderType": "text"
+          }
+        }]
+      }]
     }]
-  },
-  "state": {
-    "data": [{
-      "title": "小户型卫浴怎样才能装得高大上？",
-      "coverImage": "https://img.alicdn.com/tfs/TB1Txq6o7T2gK0jSZFkXXcIQFXa-684-684.png",
-      "readCount": 200,
-      "user": {
-        "userImage": "https://img.alicdn.com/tfs/TB1DWe6oYj1gK0jSZFOXXc7GpXa-60-60.png",
-        "userName": "时尚家居"
-      },
-      "url": "https://www.imgcook.com"
-    }, {
-      "title": "拥有超多功能的40平米简约小公寓了解一下",
-      "coverImage": "https://img.alicdn.com/tfs/TB1XRQTo7P2gK0jSZPxXXacQpXa-684-648.png",
-      "readCount": 500,
-      "user": {
-        "userImage": "https://img.alicdn.com/tfs/TB1DWe6oYj1gK0jSZFOXXc7GpXa-60-60.png",
-        "userName": "花花设计工作"
-      },
-      "url": "https://www.imgcook.com/docs"
-    }]
-  }
+  }],
+  "reference": "fusion_image",
+  "artboardImg": "https://img.alicdn.com/tfs/TB1P28qAoY1gK0jSZFMXXaWcVXa-2880-2126.png"
 }
